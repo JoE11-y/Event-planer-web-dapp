@@ -12,6 +12,7 @@ let events = {}
 let contract
 let kit
 let isDonationMsgActive
+let eID
 
 /// Blockchain functions
 
@@ -104,7 +105,7 @@ const getEvent = async function(_ID) {
   }
 
   events["isEventActive"] = await contract.methods.checkEventStatus(_ID).call()
-  isDonationMsgActive = await contract.methods.checkForDonations(_ID).call()
+  isDonationMsgActive = await contract.methods.checkForDonation(_ID).call()
 
   if (isDonationMsgActive == true){
     events["donationMessage"] = await contract.methods.getDonationMsg(_ID).call()
@@ -130,22 +131,78 @@ async function approve(_price) {
 
 
 
-
-
-
 /// Created functions
-function eventTemplate(_event){
+function eventTemplate(_event){ 
   let locationDetail1 
   let locationDetail2
   let locationDetail3
   let locationDetail4
   let locationDetail5
+  let date
+
+  if (events.eventStart == events.eventEnds){
+    date = events.eventStart
+  } else{
+    date = events.eventStart + " - " + events.eventEnds
+  }
+
     if (_event.locationtype == "Online Event"){
         locationDetail1=_event.youtube;
         locationDetail2=_event.zoom;
         locationDetail3=_event.googleMeet;
         locationDetail4=_event.skype;
         locationDetail5=_event.others; 
+
+        return`
+            <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="eventModals" style="padding-right: 5px;">Event ID:</h6><span>#${_event.eventID}</span>
+                <button
+                type="button"
+                class="btn-close closeModal"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+              <div class="card mb-4">
+                <img class="card-img-top" src="${_event.image}" alt="...">
+                <div class="position-absolute top-0 end-0 bg-warning mt-4 px-2 py-1 rounded-start" id="attendees" >
+                <i class="bi bi-people-fill"></i>&nbsp;${_event.attendees}
+                </div>
+                <div class="card-body text-left p-4 position-relative">
+                  <div class="translate-middle-y position-absolute top-0" id="identicon"> 
+                  ${identiconTemplate(_event.owner)}
+                  </div>
+                  <h2 class="card-title fs-4 fw-bold mt-2">${_event.eventTitle}</h2>
+                  
+                  <p class="card-text mb-4" style="min-height: 40px">
+                  ${_event.eventDescription}       
+                  </p>  
+                  <p class="card-text" style="text-align: left !important;" id="Venues">
+                  <i class="bi bi-geo-alt-fill"></i>&nbsp;
+                  ${locationtype}
+                  </p>
+                  <p class="card-text" id="Date" style="text-align: left;">
+                  <i class="bi bi-calendar2-event-fill"></i>&nbsp;
+                    ${date}
+                  </p>
+                  <p class="card-text" id="Time" style="text-align: left;">
+                    <i class="bi bi-clock-fill"></i>&nbsp;
+                    ${_event.startTime} - ${_event.endTime} ${_event.timeZone}
+                  </p>
+                </div>
+              </div>      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal" id="joinEventBtn">Join Event</button>
+            </div>
+            <script>
+
+            </script>
+            </div>
+            
+            `
     }
     else{
         locationDetail1=_event.address;
@@ -153,57 +210,57 @@ function eventTemplate(_event){
         locationDetail3=_event.region;
         locationDetail4=_event.postalCode;
         locationDetail5=_event.country; 
+
+
+        return`
+            <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="eventModals" style="padding-right: 5px;">Event ID:</h6><span>#${_event.eventID}</span>
+                <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+              <div class="card mb-4">
+                <img class="card-img-top" src="${_event.image}" alt="...">
+                <div class="position-absolute top-0 end-0 bg-warning mt-4 px-2 py-1 rounded-start" id="attendees" >
+                <i class="bi bi-people-fill"></i>&nbsp;${_event.attendees}
+                </div>
+                <div class="card-body text-left p-4 position-relative">
+                  <div class="translate-middle-y position-absolute top-0" id="identicon"> 
+                  ${identiconTemplate(_event.owner)}
+                  </div>
+                  <h2 class="card-title fs-4 fw-bold mt-2">${_event.eventTitle}</h2>
+                  
+                  <p class="card-text mb-4" style="min-height: 50px">
+                  ${_event.eventDescription}       
+                  </p>  
+                  <p class="card-text" style="text-align: left !important;" id="Venues">
+                  <i class="bi bi-geo-alt-fill"></i>&nbsp;
+                  ${locationDetail2}, ${locationDetail5}
+                  </p>
+                  <p class="card-text" id="Date" style="text-align: left;">
+                  <i class="bi bi-calendar2-event-fill"></i>&nbsp;
+                    ${date}
+                  </p>
+                  <p class="card-text" id="Time" style="text-align: left;">
+                    <i class="bi bi-clock-fill"></i>&nbsp;
+                    ${_event.startTime} - ${_event.endTime} ${_event.timeZone}
+                  </p>
+                </div>
+              </div>      
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal" id="joinEventButton">Join Event</button>
+            </div>
+            </div>
+            `
+
     }
-    return`
-    <div class="modal-content">
-    <div class="modal-header">
-        <h6 class="modal-title" id="eventModals" style="padding-right: 5px;">Event ID:</h6><span>#${_event.eventID}</span>
-        <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-        ></button>
-    </div>
-    <div class="modal-body">
-      <div class="card mb-4">
-        <img class="card-img-top" src="" alt="...">
-        <div class="position-absolute top-0 end-0 bg-warning mt-4 px-2 py-1 rounded-start" id="attendees" >
-        <i class="bi bi-people-fill"></i>${_event.attendees}
-        </div>
-        <div class="card-body text-left p-4 position-relative">
-          <div class="translate-middle-y position-absolute top-0" id="identicon"> 
-          ${identiconTemplate(_event.owner)}
-          </div>
-          <h2 class="card-title fs-4 fw-bold mt-2">${_event.eventTitle}</h2>
-          
-          <p class="card-text mb-4" style="min-height: 82px">
-          ${_event.eventDescription}       
-          </p>  
-          <p class="card-text" style="min-height: 82px" id="Venues">
-            <span><h4>${_event.locationtype}</h4></span>
-            <i class="bi bi-geo-alt-fill"></i>
-            ${locationDetail1}<br>
-            ${locationDetail2}<br>
-            ${locationDetail3}<br>
-            ${locationDetail5}<br>
-          </p>
-          <p class="card-text" id="Date">
-            <i class="bi bi-calendar4-week"></i>
-            ${_event.eventStart} to ${_event.eventEnds}
-          </p>
-          <p class="card-text" id="Time">
-            <i class="bi bi-clock-fill"></i>
-            ${_event.startTime} - ${_event.endTime} ${_event.timeZone}
-          </p>
-        </div>
-      </div>      
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-lg btn-block" data-bs-dismiss="modal" id="joinEventButton">Join Event</button>
-    </div>
-    </div>
-    `
+    
 }
 
 function identiconTemplate(_address) {
@@ -353,8 +410,17 @@ $(document).ready(()=>{
     } else {
         isDonationMsgActive = false
     }
-    alert(isDonationMsg)
   });
+
+  $("#joinEventBtn").click(function(){
+    alert('selected')
+  });
+
+  $(".closeModal").click(function(){
+    alert('selected')
+  });
+
+
 
 });
 
@@ -367,8 +433,8 @@ document.querySelector("#connectAccount").addEventListener("click",  async (e) =
 })
 
 document.querySelector("#findEventBtn").addEventListener("click",  async (e) => {
-  let _eID = document.getElementById("eventID").value
-  getEvent(_eID)
+  eID = document.getElementById("eventID").value
+  getEvent(eID)
 })
 
 
