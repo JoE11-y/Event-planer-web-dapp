@@ -1,5 +1,3 @@
-
-
 # Dapp Functionality
 This dapp is used for creating or joining already created events were all data are stored on the Celo network blockchain.
 It employs a minimalist ux design, which allows quick integration.
@@ -24,11 +22,25 @@ This dapps employs three types of user characters.
 		- It also shows the amount of donations the user has received from the event attendees.
 
 
+
 # Usage
 1. Install the [CeloExtensionWallet](https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en) from the google chrome store.
 2. Create a wallet.
 3. Go to [https://celo.org/developers/faucet](https://celo.org/developers/faucet) and get tokens for the alfajores testnet.
 4. Switch to the alfajores testnet in the CeloExtensionWallet.
+
+
+
+# Test the Dapp
+
+```
+
+Use already created Event IDs 
+1. #Test1234
+2. #Retest1234
+
+```
+Live Demo url: https://joe11-y.github.io/Event-planer-web-dapp/
 
 
 ## Development
@@ -57,10 +69,4 @@ npm run dev
 
 ```
 
-# Build
 
-```
-
-npm run build
-
-```
