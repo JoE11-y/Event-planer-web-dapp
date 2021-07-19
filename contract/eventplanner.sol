@@ -17,8 +17,9 @@ interface IERC20Token {
 contract EventPlanner {
     
     
-    uint256 internal userIndex = 0;
+    uint256 internal userIndex = 1;
     address internal cUsdTokenAddress = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
+   
     
     modifier onlyEventOwner(string memory _id) {
         require(msg.sender == events[_id].owner,"Only Campaign owner can call this function.");
@@ -71,7 +72,7 @@ contract EventPlanner {
         mapping (string => datenTime) dates;
         mapping (string => eventLink) elink;
         mapping (address => uint) donations;
-        mapping (uint => address) attendees;
+        mapping (address => uint) attendees;
     }
     
     function writeEvent(
@@ -88,6 +89,7 @@ contract EventPlanner {
     ) public {
 
         Event storage _event = events[_id];
+        _event.owner = payable(msg.sender);
         _event.eventTitle = _eventTitle;
         _event.organizer = _organizer;
         _event.image = _image;
@@ -170,7 +172,7 @@ contract EventPlanner {
     
     function joinEvent(string memory _id) public {
         events[_id].attendance++;
-        events[_id].attendees[userIndex] = msg.sender;
+        events[_id].attendees[msg.sender] = userIndex;
         userIndex++;
     }
     
@@ -192,6 +194,14 @@ contract EventPlanner {
     
     function checkForDonation(string memory _id) public view returns(bool){
         return events[_id].isDonationActive;
+    }
+    
+    function hasUserJoined(string memory _id, address user) public view returns(bool){
+        if(events[_id].attendees[user] != 0){
+            return true;
+        }else{
+            return false;
+        }
     }
     
 }
