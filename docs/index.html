@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="EN">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+        crossorigin="anonymous"/>
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+
+        <link rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+        />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.9.0/mdb.min.css"
+        rel="stylesheet"
+        />
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/navbars/">
+      
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;500;700&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            :root {
+            --bs-font-sans-serif: "DM Sans", sans-serif;
+            font-family: 'Asap', sans-serif;
+            }
+    
+            @media (min-width: 576px) {
+            .card {
+                border: 0;
+                box-shadow: rgb(0 0 0 / 5%) 0px 10px 20px;
+                border-radius: 10px;
+            }
+    
+            .card-img-top {
+                width: 100%;
+                height: 20vw;
+                object-fit: cover;
+            }   
+            }
+        </style>
+    
+        <title>Event Planner</title>
+    </head>
+    <body class="text-center" style=" background-color: #f5f5f5"> 
+        <style>
+            .back{
+                box-shadow: none;
+            }
+        </style>
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                <a class="navbar-brand"><i class="bi-calendar-event"></i>&nbsp;Event Planner</a>
+                
+                <a class="nav-link border btn btn-light rounded-pill" id="connectAccount" style="display: flex;">
+                    <span>connect account</span> 
+                </a>
+                <a class="addr nav-link border btn btn-light rounded-pill" href="#" id='blockchainlink' target="_blank" style="display: none;" >
+                    <span id="address">0x874....C1</span> <!---First five and last two-->
+                </a>
+                </div>
+            </nav>
+            <div style=" padding-bottom: 30px; height: 100px;">
+                <nav class="navbar navbar-expand-lg back" style="background-color: #f5f5f5 !important; padding-bottom: 15px">  
+                    <div class="container" >
+                    <a></a>
+                    <span class="bal nav-link border btn-light rounded-pill bg-light">
+                        <span id="balance">0</span>
+                        cUSD
+                    </span>
+                    </div>
+                </nav>
+                <nav class="navbar navbar-expand-lg back" style="background-color: #f5f5f5 !important;">  
+                    <div class="container" >
+                    <div class="navbar-brand"> 
+                        <div class="alert alert-warning sticky-top" role="alert">
+                            <span id="notification">Connect Your Wallet</span>
+                        </div>
+                    </div>
+                    </div>
+                </nav>
+            </div>
+            
+           
+        </div>
+
+        <div class="container mt-2 p-3 mb-4d-flex align-items-center justify-content-center" style="max-width: 72emstyle; display: flex;
+        align-items: center;
+        background-color: #f5f5f5;
+        height: 550px;">
+        <main style = "width: 100%; max-width: 330px; padding: 15px;
+        margin: auto;"> 
+          <div>  
+              <button
+              class="btn btn-dark rounded-pill mb-3 fw-normal btnss"
+              data-bs-toggle="modal"
+              data-bs-target="#addModal1"
+              disabled
+              >
+              Create Event
+          </button>
+           </div> 
+           <div>  
+              <button
+              class="btn btn-dark rounded-pill mb-3 fw-normal btnss"
+              data-bs-toggle="modal"
+              data-bs-target="#addModal2"
+              disabled
+              >
+              Find Event
+           </button>
+           </div> 
+        </main>
+      </div>
+
+  <!--Modal-1-->
+      <div
+          class="modal fade"
+          id="addModal1"
+          tabindex="-1"
+          aria-labelledby="newEventModalLabel"
+          aria-hidden="true"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+      >
+          <div class="modal-dialog" style=" background-color: #f5f5f5"> 
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="newEventModalLabel">Create new Event</h5>
+                      <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                      ></button>
+                  </div>
+                  <div class="modal-body">
+                      <style>
+                          .is-hidden{
+                        display: none;
+                        }  
+                      </style>  
+                      <form>
+                          <h3><i class="bi bi-info-square"></i></h3>
+                          <span>Basic Info</span>
+                          <div class="form-row">
+                            <div class="mb-2" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <label for="newEventTitle" style="display: flex;">Create Event ID:</label>&nbsp;
+                                <input type="text" class="form-control" id="newEventID" placeholder="#NAME1234" style="width: 73%"> 
+                            </div>
+                              <div class="form-floating mb-2">
+                                  <input type="text" class="form-control" id="newEventTitle" placeholder="Event Title">
+                                  <label for="newEventTitle">Event Title</label>
+                              </div>
+                              <div class="form-floating mb-2">
+                                  <input type="text" class="form-control" id="eventOrganizer" placeholder="Event Title">
+                                  <label for="eventOrganizer">Organizer</label>
+                              </div>
+                              <div class="form-floating mb-2">
+                                  <input type="text" class="form-control" id="newImgUrl" placeholder="Event Image url">
+                                  <label for="newImgUrl">Event Image url</label>
+                              </div>
+                              <div class="form-floating mb-2">
+                                  <input type="text" class="form-control" id="newEventDescription" placeholder="Event Description">
+                                  <label for="newEventDescription">Event Description</label>
+                              </div>
+                              <div class="form-floating mb-2">
+                                  <select class="form-select" id="newEventType" aria-label="Event type">
+                                      <option selected>- please select -</option>
+                                      <option value="Class, Training, or Workshop">Class, Training, or Workshop</option>
+                                      <option value="Concert">Concert</option>
+                                      <option value="Conference">Conference</option>
+                                      <option value="Convention">Convention</option>
+                                      <option value="Dinner or Gala">Dinner or Gala</option>
+                                      <option value="Festival or Fair">Festival or Fair</option>
+                                      <option value="Gameshow">Gameshow</option>
+                                      <option value="Networking Event">Networking Event</option>
+                                      <option value="Party or Social Gathering">Party or Social Gathering</option>
+                                      <option value="Rally">Rally</option>
+                                      <option value="Tour">Tour</option>
+                                      <option value="Tournament">Tournament</option>
+                                  </select>
+                                  <label for="newEventType">Event Type</label>
+                              </div>
+                          </div>
+                          <hr>
+                          <h3><i class="bi bi-geo-alt"></i></h3>  
+                          <span>Location</span>
+                          <div class="form-row">
+                              <div class="form-floating mb-2">
+                                  <select class="form-select js-revealer" id="newEventLocationType" aria-label="Location">
+                                    <option value="0" data-r-show-target="" data-r-hide-target=".opt-1, .opt-2">- please select -</option>
+                                    <option value="Venue" data-r-show-target=".opt-1" data-r-hide-target=".opt-2">Venue</option>
+                                    <option value="Online Event" data-r-show-target=".opt-2" data-r-hide-target=".opt-1">Online Event</option>
+                                  </select>
+                                  <label for="newEventLocation">Location</label>
+                              </div>
+                            </div>
+                            <div data-response="op1" class="form-group opt-1 is-hidden">
+                                <div class="form-row form-floating mb-2">
+                                  <input type="text" class="form-control w-100" id="newEventAddress" placeholder="Address">
+                                  <label for="newEventAddress">Address</label>
+                                </div>
+                                <div class="form-row row">
+                                  <div class="form-floating mb-2 col-6">
+                                    <input type="text" class="form-control" id="newEventCity" placeholder="City">
+                                    <label for="newEventCity" style="padding-left: 20px !important;">City</label>
+                                  </div>
+                                  <div class=" form-floating mb-2 col-3">
+                                    <input type="text" class="form-control" id="newEventRegion" placeholder="Region">
+                                    <label for="newEventRegion" style="padding-left: 20px !important;">Region</label>
+                                  </div>
+                                  <div class=" form-floating mb-2 col-3">
+                                    <input type="text" class="form-control" id="newEventPostalCode" placeholder="Postal Code">
+                                    <label for="newEventPostalCode" style="padding-left: 20px !important; font-size: 15px;">Postal code</label>
+                                  </div>
+                                </div>
+                                <div class=" form-floating mb-2">
+                                  <input type="text" class="form-control w-100" id="newEventCountry" placeholder="Links">
+                                  <label for="newEventCountry">Country</label>
+                                </div>
+                            </div>
+                            <div data-response="op2" class="form-group opt-2 is-hidden">
+                              <div class=" form-row form-floating mb-2 js-revealer1">
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" data-r-show-target=".option-1">
+                                  <label class="form-check-label" for="inlineCheckbox1"><i class="fa fa-facebook-square" style="font-size:24px; color:blue;"></i></label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" data-r-show-target=".option-2">
+                                  <label class="form-check-label" for="inlineCheckbox2"><i class="fa fa-skype" style="font-size:24px; color:aqua;"></i></label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" data-r-show-target=".option-3">
+                                  <label class="form-check-label" for="inlineCheckbox3"><i class="fa fa-youtube-play" style="font-size:24px; color:#FF0000;"></i></label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" data-r-show-target=".option-4">
+                                  <label class="form-check-label" for="inlineCheckbox4"><i class="fa fa-google" style="font-size:24px; color:#DB4437;"></i></label>
+                                </div>
+                              </div>
+                              <div class="form-floating mb-2 option-1 is-hidden">
+                                <input type="text" class="form-control" id="facebook" placeholder="Facebook">
+                                <label for="facebook">Facebook</label>
+                              </div>
+                              <div class="form-floating mb-2 option-2 is-hidden">
+                                <input type="text" class="form-control" id="skype" placeholder="Skype">
+                                <label for="skype">Skype</label>
+                              </div>
+                              <div class="form-floating mb-2 option-3 is-hidden">
+                                <input type="text" class="form-control" id="youtube" placeholder="Youtube">
+                                <label for="youtube">Youtube</label>
+                              </div>
+                              <div class="form-floating mb-2  option-4 is-hidden">
+                                <input type="text" class="form-control" id="googleMeet" placeholder="Google Meet">
+                                <label for="googleMeet">Google Meet</label>
+                              </div>  
+                              <div class="form-floating mb-2">
+                                <input type="text" class="form-control" id="others" placeholder="Others">
+                                <label for="others">Others</label>
+                            </div>
+                          </div>
+        
+                          <hr>
+                          <h3><i class="bi bi-calendar-plus"></i></h3>
+                          <span>Date</span>
+                          <div class="form-row row">
+                              <div class=" form-floating mb-2 col-6">
+                                  <input type="date" class="form-control timepicker-inline-12" id="newEventStartDate" placeholder="Event Starts">
+                                  <label for="newEventStartDate" style="padding-left: 20px !important;">Events Starts</label>
+                                </div>
+                                <div class=" form-floating mb-2 col-6">
+                                  <input type="date" class="form-control datepicker" id="newEventEndDate" placeholder="Event Ends">
+                                  <label for="newEventEndDate" style="padding-left: 20px !important; font-size: 15px;">Event Ends</label>
+                                </div>
+                          </div> 
+                          <div class="form-row row">
+
+                                <div class="form-floating mb-2 col-6">
+                                  <input type="time" id="newEventStartTime" class="form-control" placeholder="Start time">
+                                  <label for="newEventStartTime" style="padding-left: 20px !important; font-size: 15px;">Start Time</label>
+                                </div>
+
+                                <div class="form-floating mb-2 col-6">
+                                  <input type="time" class="form-control" id="newEventEndTime" placeholder="End Time">
+                                  <label for="newEventEndTime" style="padding-left: 20px !important; font-size: 15px;">End Time</label>
+                                </div>
+                          </div>  
+                          <div class="form-floating mb-2">
+                            <select  class="form-select" id="newEventTimezone"  aria-label="Event timezone" role="listbox" name="venueTimeZone">
+                                    <option value="Pacific/Pago_Pago"  >
+                                    (GMT-1100) American Samoa Time</option>
+                                    <option value="Pacific/Niue"  >
+                                    (GMT-1100) Niue Time</option>
+                                    <option value="Pacific/Midway"  >
+                                    (GMT-1100) U.S. Outlying Islands (Midway) Time</option>
+                                    <option value="Pacific/Rarotonga"  >
+                                    (GMT-1000) Cook Islands Time</option>
+                                    <option value="Pacific/Tahiti"  >
+                                    (GMT-1000) French Polynesia Time</option>
+                                    <option value="Pacific/Honolulu"  >
+                                    (GMT-1000) United States (Honolulu) Time</option>
+                                    <option value="Pacific/Marquesas"  >
+                                    (GMT-0930) World (Marquesas) Time</option>
+                                    <option value="America/Adak"  >
+                                    (GMT-0900) World (Adak) Time</option>
+                                    <option value="Pacific/Gambier"  >
+                                    (GMT-0900) World (Gambier) Time</option>
+                                    <option value="America/Anchorage"  >
+                                    (GMT-0800) United States (Anchorage) Time</option>
+                                    <option value="America/Juneau"  >
+                                    (GMT-0800) United States (Juneau) Time</option>
+                                    <option value="America/Metlakatla"  >
+                                    (GMT-0800) United States (Metlakatla) Time</option>
+                                    <option value="America/Nome"  >
+                                    (GMT-0800) United States (Nome) Time</option>
+                                    <option value="America/Sitka"  >
+                                    (GMT-0800) United States (Sitka) Time</option>
+                                    <option value="America/Yakutat"  >
+                                    (GMT-0800) United States (Yakutat) Time</option>
+                                    <option value="Pacific/Pitcairn"  >
+                                    (GMT-0800) World (Pitcairn) Time</option>
+                                    <option value="America/Creston"  >
+                                    (GMT-0700) Canada (Creston) Time</option>
+                                    <option value="America/Dawson_Creek"  >
+                                    (GMT-0700) Canada (Dawson Creek) Time</option>
+                                    <option value="America/Dawson"  >
+                                    (GMT-0700) Canada (Dawson) Time</option>
+                                    <option value="America/Fort_Nelson"  >
+                                    (GMT-0700) Canada (Fort Nelson) Time</option>
+                                    <option value="America/Vancouver"  >
+                                    (GMT-0700) Canada (Vancouver) Time</option>
+                                    <option value="America/Whitehorse"  >
+                                    (GMT-0700) Canada (Whitehorse) Time</option>
+                                    <option value="America/Hermosillo"  >
+                                    (GMT-0700) Mexico (Hermosillo) Time</option>
+                                    <option value="America/Santa_Isabel"  >
+                                    (GMT-0700) Mexico (Santa Isabel) Time</option>
+                                    <option value="America/Tijuana"  >
+                                    (GMT-0700) Mexico (Tijuana) Time</option>
+                                    <option value="America/Los_Angeles"  >
+                                    (GMT-0700) United States (Los Angeles) Time</option>
+                                    <option value="America/Phoenix"  >
+                                    (GMT-0700) United States (Phoenix) Time</option>
+                                    <option value="America/Belize"  >
+                                    (GMT-0600) Belize Time</option>
+                                    <option value="America/Cambridge_Bay"  >
+                                    (GMT-0600) Canada (Cambridge Bay) Time</option>
+                                    <option value="America/Edmonton"  >
+                                    (GMT-0600) Canada (Edmonton) Time</option>
+                                    <option value="America/Inuvik"  >
+                                    (GMT-0600) Canada (Inuvik) Time</option>
+                                    <option value="America/Regina"  >
+                                    (GMT-0600) Canada (Regina) Time</option>
+                                    <option value="America/Swift_Current"  >
+                                    (GMT-0600) Canada (Swift Current) Time</option>
+                                    <option value="America/Yellowknife"  >
+                                    (GMT-0600) Canada (Yellowknife) Time</option>
+                                    <option value="Pacific/Easter"  >
+                                    (GMT-0600) Chile (Easter) Time</option>
+                                    <option value="America/Costa_Rica"  >
+                                    (GMT-0600) Costa Rica Time</option>
+                                    <option value="Pacific/Galapagos"  >
+                                    (GMT-0600) Ecuador (Galapagos) Time</option>
+                                    <option value="America/El_Salvador"  >
+                                    (GMT-0600) El Salvador Time</option>
+                                    <option value="America/Guatemala"  >
+                                    (GMT-0600) Guatemala Time</option>
+                                    <option value="America/Tegucigalpa"  >
+                                    (GMT-0600) Honduras Time</option>
+                                    <option value="America/Chihuahua"  >
+                                    (GMT-0600) Mexico (Chihuahua) Time</option>
+                                    <option value="America/Mazatlan"  >
+                                    (GMT-0600) Mexico (Mazatlan) Time</option>
+                                    <option value="America/Ojinaga"  >
+                                    (GMT-0600) Mexico (Ojinaga) Time</option>
+                                    <option value="America/Managua"  >
+                                    (GMT-0600) Nicaragua Time</option>
+                                    <option value="America/Boise"  >
+                                    (GMT-0600) United States (Boise) Time</option>
+                                    <option value="America/Denver"  >
+                                    (GMT-0600) United States (Denver) Time</option>
+                                    <option value="America/Eirunepe"  >
+                                    (GMT-0500) Brazil (Eirunepe) Time</option>
+                                    <option value="America/Rio_Branco"  >
+                                    (GMT-0500) Brazil (Rio Branco) Time</option>
+                                    <option value="America/Atikokan"  >
+                                    (GMT-0500) Canada (Atikokan) Time</option>
+                                    <option value="America/Rainy_River"  >
+                                    (GMT-0500) Canada (Rainy River) Time</option>
+                                    <option value="America/Rankin_Inlet"  >
+                                    (GMT-0500) Canada (Rankin Inlet) Time</option>
+                                    <option value="America/Resolute"  >
+                                    (GMT-0500) Canada (Resolute) Time</option>
+                                    <option value="America/Winnipeg"  >
+                                    (GMT-0500) Canada (Winnipeg) Time</option>
+                                    <option value="America/Cayman"  >
+                                    (GMT-0500) Cayman Islands Time</option>
+                                    <option value="America/Bogota"  >
+                                    (GMT-0500) Colombia Time</option>
+                                    <option value="America/Guayaquil"  >
+                                    (GMT-0500) Ecuador (Guayaquil) Time</option>
+                                    <option value="America/Jamaica"  >
+                                    (GMT-0500) Jamaica Time</option>
+                                    <option value="America/Bahia_Banderas"  >
+                                    (GMT-0500) Mexico (Bahia Banderas) Time</option>
+                                    <option value="America/Cancun"  >
+                                    (GMT-0500) Mexico (Cancun) Time</option>
+                                    <option value="America/Matamoros"  >
+                                    (GMT-0500) Mexico (Matamoros) Time</option>
+                                    <option value="America/Merida"  >
+                                    (GMT-0500) Mexico (Merida) Time</option>
+                                    <option value="America/Mexico_City"  >
+                                    (GMT-0500) Mexico (Mexico City) Time</option>
+                                    <option value="America/Monterrey"  >
+                                    (GMT-0500) Mexico (Monterrey) Time</option>
+                                    <option value="America/Panama"  >
+                                    (GMT-0500) Panama Time</option>
+                                    <option value="America/Lima"  >
+                                    (GMT-0500) Peru Time</option>
+                                    <option value="America/North_Dakota/Beulah"  >
+                                    (GMT-0500) United States (Beulah, North Dakota) Time</option>
+                                    <option value="America/North_Dakota/Center"  >
+                                    (GMT-0500) United States (Center, North Dakota) Time</option>
+                                    <option value="America/Chicago"  >
+                                    (GMT-0500) United States (Chicago) Time</option>
+                                    <option value="America/Indiana/Knox"  >
+                                    (GMT-0500) United States (Knox, Indiana) Time</option>
+                                    <option value="America/Menominee"  >
+                                    (GMT-0500) United States (Menominee) Time</option>
+                                    <option value="America/North_Dakota/New_Salem"  >
+                                    (GMT-0500) United States (New Salem, North Dakota) Time</option>
+                                    <option value="America/Indiana/Tell_City"  >
+                                    (GMT-0500) United States (Tell City, Indiana) Time</option>
+                                    <option value="America/Anguilla"  >
+                                    (GMT-0400) Anguilla Time</option>
+                                    <option value="America/Antigua"  >
+                                    (GMT-0400) Antigua &amp; Barbuda Time</option>
+                                    <option value="America/Aruba"  >
+                                    (GMT-0400) Aruba Time</option>
+                                    <option value="America/Nassau"  >
+                                    (GMT-0400) Bahamas Time</option>
+                                    <option value="America/Barbados"  >
+                                    (GMT-0400) Barbados Time</option>
+                                    <option value="America/La_Paz"  >
+                                    (GMT-0400) Bolivia Time</option>
+                                    <option value="America/Boa_Vista"  >
+                                    (GMT-0400) Brazil (Boa Vista) Time</option>
+                                    <option value="America/Campo_Grande"  >
+                                    (GMT-0400) Brazil (Campo Grande) Time</option>
+                                    <option value="America/Cuiaba"  >
+                                    (GMT-0400) Brazil (Cuiaba) Time</option>
+                                    <option value="America/Manaus"  >
+                                    (GMT-0400) Brazil (Manaus) Time</option>
+                                    <option value="America/Porto_Velho"  >
+                                    (GMT-0400) Brazil (Porto Velho) Time</option>
+                                    <option value="America/Tortola"  >
+                                    (GMT-0400) British Virgin Islands Time</option>
+                                    <option value="America/Blanc-Sablon"  >
+                                    (GMT-0400) Canada (Blanc-Sablon) Time</option>
+                                    <option value="America/Iqaluit"  >
+                                    (GMT-0400) Canada (Iqaluit) Time</option>
+                                    <option value="America/Nipigon"  >
+                                    (GMT-0400) Canada (Nipigon) Time</option>
+                                    <option value="America/Pangnirtung"  >
+                                    (GMT-0400) Canada (Pangnirtung) Time</option>
+                                    <option value="America/Thunder_Bay"  >
+                                    (GMT-0400) Canada (Thunder Bay) Time</option>
+                                    <option value="America/Toronto"  >
+                                    (GMT-0400) Canada (Toronto) Time</option>
+                                    <option value="America/Kralendijk"  >
+                                    (GMT-0400) Caribbean Netherlands Time</option>
+                                    <option value="America/Santiago"  >
+                                    (GMT-0400) Chile (Santiago) Time</option>
+                                    <option value="America/Havana"  >
+                                    (GMT-0400) Cuba Time</option>
+                                    <option value="America/Curacao"  >
+                                    (GMT-0400) Curaçao Time</option>
+                                    <option value="America/Dominica"  >
+                                    (GMT-0400) Dominica Time</option>
+                                    <option value="America/Santo_Domingo"  >
+                                    (GMT-0400) Dominican Republic Time</option>
+                                    <option value="America/Grenada"  >
+                                    (GMT-0400) Grenada Time</option>
+                                    <option value="America/Guadeloupe"  >
+                                    (GMT-0400) Guadeloupe Time</option>
+                                    <option value="America/Guyana"  >
+                                    (GMT-0400) Guyana Time</option>
+                                    <option value="America/Port-au-Prince"  >
+                                    (GMT-0400) Haiti Time</option>
+                                    <option value="America/Martinique"  >
+                                    (GMT-0400) Martinique Time</option>
+                                    <option value="America/Montserrat"  >
+                                    (GMT-0400) Montserrat Time</option>
+                                    <option value="America/Asuncion"  >
+                                    (GMT-0400) Paraguay Time</option>
+                                    <option value="America/Puerto_Rico"  >
+                                    (GMT-0400) Puerto Rico Time</option>
+                                    <option value="America/Lower_Princes"  >
+                                    (GMT-0400) Sint Maarten Time</option>
+                                    <option value="America/St_Barthelemy"  >
+                                    (GMT-0400) St. Barthélemy Time</option>
+                                    <option value="America/St_Kitts"  >
+                                    (GMT-0400) St. Kitts &amp; Nevis Time</option>
+                                    <option value="America/St_Lucia"  >
+                                    (GMT-0400) St. Lucia Time</option>
+                                    <option value="America/Marigot"  >
+                                    (GMT-0400) St. Martin Time</option>
+                                    <option value="America/St_Vincent"  >
+                                    (GMT-0400) St. Vincent &amp; Grenadines Time</option>
+                                    <option value="America/Port_of_Spain"  >
+                                    (GMT-0400) Trinidad &amp; Tobago Time</option>
+                                    <option value="America/Grand_Turk"  >
+                                    (GMT-0400) Turks &amp; Caicos Islands Time</option>
+                                    <option value="America/St_Thomas"  >
+                                    (GMT-0400) U.S. Virgin Islands Time</option>
+                                    <option value="America/Detroit"  >
+                                    (GMT-0400) United States (Detroit) Time</option>
+                                    <option value="America/Indiana/Indianapolis"  >
+                                    (GMT-0400) United States (Indianapolis) Time</option>
+                                    <option value="America/Kentucky/Louisville"  >
+                                    (GMT-0400) United States (Louisville) Time</option>
+                                    <option value="America/Indiana/Marengo"  >
+                                    (GMT-0400) United States (Marengo, Indiana) Time</option>
+                                    <option value="America/Kentucky/Monticello"  >
+                                    (GMT-0400) United States (Monticello, Kentucky) Time</option>
+                                    <option value="America/New_York"  >
+                                    (GMT-0400) United States (New York) Time</option>
+                                    <option value="America/Indiana/Petersburg"  >
+                                    (GMT-0400) United States (Petersburg, Indiana) Time</option>
+                                    <option value="America/Indiana/Vevay"  >
+                                    (GMT-0400) United States (Vevay, Indiana) Time</option>
+                                    <option value="America/Indiana/Vincennes"  >
+                                    (GMT-0400) United States (Vincennes, Indiana) Time</option>
+                                    <option value="America/Indiana/Winamac"  >
+                                    (GMT-0400) United States (Winamac, Indiana) Time</option>
+                                    <option value="America/Caracas"  >
+                                    (GMT-0400) Venezuela Time</option>
+                                    <option value="Antarctica/Palmer"  >
+                                    (GMT-0300) Antarctica (Palmer) Time</option>
+                                    <option value="Antarctica/Rothera"  >
+                                    (GMT-0300) Antarctica (Rothera) Time</option>
+                                    <option value="America/Argentina/La_Rioja"  >
+                                    (GMT-0300) Argentina (Argentina/La Rioja) Time</option>
+                                    <option value="America/Argentina/Rio_Gallegos"  >
+                                    (GMT-0300) Argentina (Argentina/Rio Gallegos) Time</option>
+                                    <option value="America/Argentina/Salta"  >
+                                    (GMT-0300) Argentina (Argentina/Salta) Time</option>
+                                    <option value="America/Argentina/San_Juan"  >
+                                    (GMT-0300) Argentina (Argentina/San Juan) Time</option>
+                                    <option value="America/Argentina/San_Luis"  >
+                                    (GMT-0300) Argentina (Argentina/San Luis) Time</option>
+                                    <option value="America/Argentina/Tucuman"  >
+                                    (GMT-0300) Argentina (Argentina/Tucuman) Time</option>
+                                    <option value="America/Argentina/Ushuaia"  >
+                                    (GMT-0300) Argentina (Argentina/Ushuaia) Time</option>
+                                    <option value="America/Argentina/Buenos_Aires"  >
+                                    (GMT-0300) Argentina (Buenos Aires) Time</option>
+                                    <option value="America/Argentina/Catamarca"  >
+                                    (GMT-0300) Argentina (Catamarca) Time</option>
+                                    <option value="America/Argentina/Cordoba"  >
+                                    (GMT-0300) Argentina (Cordoba) Time</option>
+                                    <option value="America/Argentina/Jujuy"  >
+                                    (GMT-0300) Argentina (Jujuy) Time</option>
+                                    <option value="America/Argentina/Mendoza"  >
+                                    (GMT-0300) Argentina (Mendoza) Time</option>
+                                    <option value="Atlantic/Bermuda"  >
+                                    (GMT-0300) Bermuda Time</option>
+                                    <option value="America/Araguaina"  >
+                                    (GMT-0300) Brazil (Araguaina) Time</option>
+                                    <option value="America/Bahia"  >
+                                    (GMT-0300) Brazil (Bahia) Time</option>
+                                    <option value="America/Belem"  >
+                                    (GMT-0300) Brazil (Belem) Time</option>
+                                    <option value="America/Fortaleza"  >
+                                    (GMT-0300) Brazil (Fortaleza) Time</option>
+                                    <option value="America/Maceio"  >
+                                    (GMT-0300) Brazil (Maceio) Time</option>
+                                    <option value="America/Recife"  >
+                                    (GMT-0300) Brazil (Recife) Time</option>
+                                    <option value="America/Santarem"  >
+                                    (GMT-0300) Brazil (Santarem) Time</option>
+                                    <option value="America/Sao_Paulo"  >
+                                    (GMT-0300) Brazil (Sao Paulo) Time</option>
+                                    <option value="America/Glace_Bay"  >
+                                    (GMT-0300) Canada (Glace Bay) Time</option>
+                                    <option value="America/Goose_Bay"  >
+                                    (GMT-0300) Canada (Goose Bay) Time</option>
+                                    <option value="America/Halifax"  >
+                                    (GMT-0300) Canada (Halifax) Time</option>
+                                    <option value="America/Moncton"  >
+                                    (GMT-0300) Canada (Moncton) Time</option>
+                                    <option value="Atlantic/Stanley"  >
+                                    (GMT-0300) Falkland Islands Time</option>
+                                    <option value="America/Cayenne"  >
+                                    (GMT-0300) French Guiana Time</option>
+                                    <option value="America/Thule"  >
+                                    (GMT-0300) Greenland (Thule) Time</option>
+                                    <option value="America/Paramaribo"  >
+                                    (GMT-0300) Suriname Time</option>
+                                    <option value="America/Punta_Arenas"  >
+                                    (GMT-0300) Unknown Region (Punta Arenas) Time</option>
+                                    <option value="America/Montevideo"  >
+                                    (GMT-0300) Uruguay Time</option>
+                                    <option value="America/St_Johns"  >
+                                    (GMT-0230) Canada (St. John’s) Time</option>
+                                    <option value="America/Noronha"  >
+                                    (GMT-0200) Brazil (Noronha) Time</option>
+                                    <option value="Atlantic/South_Georgia"  >
+                                    (GMT-0200) South Georgia &amp; South Sandwich Islands Time</option>
+                                    <option value="America/Nuuk"  >
+                                    (GMT-0200) Unknown Region (Nuuk) Time</option>
+                                    <option value="America/Miquelon"  >
+                                    (GMT-0200) World (Miquelon) Time</option>
+                                    <option value="Atlantic/Cape_Verde"  >
+                                    (GMT-0100) Cape Verde Time</option>
+                                    <option value="Africa/Ouagadougou"  >
+                                    (GMT+0000) Burkina Faso Time</option>
+                                    <option value="Africa/Abidjan"  >
+                                    (GMT+0000) Côte d’Ivoire Time</option>
+                                    <option value="Africa/Banjul"  >
+                                    (GMT+0000) Gambia Time</option>
+                                    <option value="Africa/Accra"  >
+                                    (GMT+0000) Ghana Time</option>
+                                    <option value="America/Danmarkshavn"  >
+                                    (GMT+0000) Greenland (Danmarkshavn) Time</option>
+                                    <option value="America/Scoresbysund"  >
+                                    (GMT+0000) Greenland (Ittoqqortoormiit) Time</option>
+                                    <option value="Africa/Conakry"  >
+                                    (GMT+0000) Guinea Time</option>
+                                    <option value="Africa/Bissau"  >
+                                    (GMT+0000) Guinea-Bissau Time</option>
+                                    <option value="Atlantic/Reykjavik"  >
+                                    (GMT+0000) Iceland Time</option>
+                                    <option value="Africa/Monrovia"  >
+                                    (GMT+0000) Liberia Time</option>
+                                    <option value="Africa/Bamako"  >
+                                    (GMT+0000) Mali Time</option>
+                                    <option value="Africa/Nouakchott"  >
+                                    (GMT+0000) Mauritania Time</option>
+                                    <option value="Atlantic/Azores"  >
+                                    (GMT+0000) Portugal (Azores) Time</option>
+                                    <option value="Africa/Sao_Tome"  >
+                                    (GMT+0000) São Tomé &amp; Príncipe Time</option>
+                                    <option value="Africa/Dakar"  >
+                                    (GMT+0000) Senegal Time</option>
+                                    <option value="Africa/Freetown"  >
+                                    (GMT+0000) Sierra Leone Time</option>
+                                    <option value="Atlantic/St_Helena"  >
+                                    (GMT+0000) St. Helena Time</option>
+                                    <option value="Africa/Lome"  >
+                                    (GMT+0000) Togo Time</option>
+                                    <option value="UTC"  >
+                                    UTC</option>
+                                    <option value="Africa/Algiers"  >
+                                    (GMT+0100) Algeria Time</option>
+                                    <option value="Africa/Luanda"  >
+                                    (GMT+0100) Angola Time</option>
+                                    <option value="Africa/Porto-Novo"  >
+                                    (GMT+0100) Benin Time</option>
+                                    <option value="Africa/Douala"  >
+                                    (GMT+0100) Cameroon Time</option>
+                                    <option value="Africa/Bangui"  >
+                                    (GMT+0100) Central African Republic Time</option>
+                                    <option value="Africa/Ndjamena"  >
+                                    (GMT+0100) Chad Time</option>
+                                    <option value="Africa/Brazzaville"  >
+                                    (GMT+0100) Congo - Brazzaville Time</option>
+                                    <option value="Africa/Kinshasa"  >
+                                    (GMT+0100) Congo - Kinshasa (Kinshasa) Time</option>
+                                    <option value="Africa/Malabo"  >
+                                    (GMT+0100) Equatorial Guinea Time</option>
+                                    <option value="Atlantic/Faroe"  >
+                                    (GMT+0100) Faroe Islands Time</option>
+                                    <option
+                                     value="Africa/Libreville"  >
+                                    (GMT+0100) Gabon Time</option>
+                                    <option value="Europe/Guernsey"  >
+                                    (GMT+0100) Guernsey Time</option>
+                                    <option value="Europe/Dublin"  >
+                                    (GMT+0100) Ireland Time</option>
+                                    <option value="Europe/Isle_of_Man"  >
+                                    (GMT+0100) Isle of Man Time</option>
+                                    <option value="Europe/Jersey"  >
+                                    (GMT+0100) Jersey Time</option>
+                                    <option value="Africa/Casablanca"  >
+                                    (GMT+0100) Morocco Time</option>
+                                    <option value="Africa/Niamey"  >
+                                    (GMT+0100) Niger Time</option>
+                                    <option value="Africa/Lagos"  >
+                                    (GMT+0100) Nigeria Time</option>
+                                    <option value="Europe/Lisbon"  >
+                                    (GMT+0100) Portugal (Lisbon) Time</option>
+                                    <option value="Atlantic/Madeira"  >
+                                    (GMT+0100) Portugal (Madeira) Time</option>
+                                    <option value="Atlantic/Canary"  >
+                                    (GMT+0100) Spain (Canary) Time</option>
+                                    <option value="Africa/Tunis"  >
+                                    (GMT+0100) Tunisia Time</option>
+                                    <option value="Europe/London"  >
+                                    (GMT+0100) United Kingdom Time</option>
+                                    <option value="Africa/El_Aaiun"  >
+                                    (GMT+0100) Western Sahara Time</option>
+                                    <option value="Europe/Tirane"  >
+                                    (GMT+0200) Albania Time</option>
+                                    <option value="Europe/Andorra"  >
+                                    (GMT+0200) Andorra Time</option>
+                                    <option value="Europe/Vienna"  >
+                                    (GMT+0200) Austria Time</option>
+                                    <option value="Europe/Brussels"  >
+                                    (GMT+0200) Belgium Time</option>
+                                    <option value="Europe/Sarajevo"  >
+                                    (GMT+0200) Bosnia &amp; Herzegovina Time</option>
+                                    <option value="Africa/Gaborone"  >
+                                    (GMT+0200) Botswana Time</option>
+                                    <option value="Africa/Bujumbura"  >
+                                    (GMT+0200) Burundi Time</option>
+                                    <option value="Africa/Lubumbashi"  >
+                                    (GMT+0200) Congo - Kinshasa (Lubumbashi) Time</option>
+                                    <option value="Europe/Zagreb"  >
+                                    (GMT+0200) Croatia Time</option>
+                                    <option value="Europe/Prague"  >
+                                    (GMT+0200) Czech Republic Time</option>
+                                    <option value="Europe/Copenhagen"  >
+                                    (GMT+0200) Denmark Time</option>
+                                    <option value="Africa/Cairo"  >
+                                    (GMT+0200) Egypt Time</option>
+                                    <option value="Europe/Paris"  >
+                                    (GMT+0200) France Time</option>
+                                    <option value="Europe/Berlin"  >
+                                    (GMT+0200) Germany (Berlin) Time</option>
+                                    <option value="Europe/Busingen"  >
+                                    (GMT+0200) Germany (Busingen) Time</option>
+                                    <option value="Europe/Gibraltar"  >
+                                    (GMT+0200) Gibraltar Time</option>
+                                    <option value="Europe/Budapest"  >
+                                    (GMT+0200) Hungary Time</option>
+                                    <option value="Europe/Rome"  >
+                                    (GMT+0200) Italy Time</option>
+                                    <option value="Africa/Maseru"  >
+                                    (GMT+0200) Lesotho Time</option>
+                                    <option value="Africa/Tripoli"  >
+                                    (GMT+0200) Libya Time</option>
+                                    <option value="Europe/Vaduz"  >
+                                    (GMT+0200) Liechtenstein Time</option>
+                                    <option value="Europe/Luxembourg"  >
+                                    (GMT+0200) Luxembourg Time</option>
+                                    <option value="Europe/Skopje"  >
+                                    (GMT+0200) Macedonia Time</option>
+                                    <option value="Africa/Blantyre"  >
+                                    (GMT+0200) Malawi Time</option>
+                                    <option value="Europe/Malta"  >
+                                    (GMT+0200) Malta Time</option>
+                                    <option value="Europe/Monaco"  >
+                                    (GMT+0200) Monaco Time</option>
+                                    <option value="Europe/Podgorica"  >
+                                    (GMT+0200) Montenegro Time</option>
+                                    <option value="Africa/Maputo"  >
+                                    (GMT+0200) Mozambique Time</option>
+                                    <option value="Africa/Windhoek"  >
+                                    (GMT+0200) Namibia Time</option>
+                                    <option value="Europe/Amsterdam"  >
+                                    (GMT+0200) Netherlands Time</option>
+                                    <option value="Europe/Oslo"  >
+                                    (GMT+0200) Norway Time</option>
+                                    <option value="Europe/Warsaw"  >
+                                    (GMT+0200) Poland Time</option>
+                                    <option value="Europe/Kaliningrad"  >
+                                    (GMT+0200) Russia (Kaliningrad) Time</option>
+                                    <option value="Africa/Kigali"  >
+                                    (GMT+0200) Rwanda Time</option>
+                                    <option value="Europe/San_Marino"  >
+                                    (GMT+0200) San Marino Time</option>
+                                    <option value="Europe/Belgrade"  >
+                                    (GMT+0200) Serbia Time</option>
+                                    <option value="Europe/Bratislava"  >
+                                    (GMT+0200) Slovakia Time</option>
+                                    <option value="Europe/Ljubljana"  >
+                                    (GMT+0200) Slovenia Time</option>
+                                    <option value="Africa/Johannesburg"  >
+                                    (GMT+0200) South Africa Time</option>
+                                    <option value="Africa/Ceuta"  >
+                                    (GMT+0200) Spain (Ceuta) Time</option>
+                                    <option value="Europe/Madrid"  >
+                                    (GMT+0200) Spain (Madrid) Time</option>
+                                    <option value="Africa/Khartoum"  >
+                                    (GMT+0200) Sudan Time</option>
+                                    <option value="Arctic/Longyearbyen"  >
+                                    (GMT+0200) Svalbard &amp; Jan Mayen Time</option>
+                                    <option value="Africa/Mbabane"  >
+                                    (GMT+0200) Swaziland Time</option>
+                                    <option value="Europe/Stockholm"  >
+                                    (GMT+0200) Sweden Time</option>
+                                    <option value="Europe/Zurich"  >
+                                    (GMT+0200) Switzerland Time</option>
+                                    <option value="Europe/Vatican"  >
+                                    (GMT+0200) Vatican City Time</option>
+                                    <option value="Antarctica/Troll"  >
+                                    (GMT+0200) World (Troll) Time</option>
+                                    <option value="Africa/Lusaka"  >
+                                    (GMT+0200) Zambia Time</option>
+                                    <option value="Africa/Harare"  >
+                                    (GMT+0200) Zimbabwe Time</option>
+                                    <option value="Europe/Mariehamn"  >
+                                    (GMT+0300) Åland Islands Time</option>
+                                    <option value="Antarctica/Syowa"  >
+                                    (GMT+0300) Antarctica (Syowa) Time</option>
+                                    <option value="Asia/Bahrain"  >
+                                    (GMT+0300) Bahrain Time</option>
+                                    <option value="Europe/Minsk"  >
+                                    (GMT+0300) Belarus Time</option>
+                                    <option value="Europe/Sofia"  >
+                                    (GMT+0300) Bulgaria Time</option>
+                                    <option value="Indian/Comoro"  >
+                                    (GMT+0300) Comoros Time</option>
+                                    <option value="Asia/Nicosia"  >
+                                    (GMT+0300) Cyprus Time</option>
+                                    <option value="Africa/Djibouti"  >
+                                    (GMT+0300) Djibouti Time</option>
+                                    <option value="Africa/Asmara"  >
+                                    (GMT+0300) Eritrea Time</option>
+                                    <option value="Europe/Tallinn"  >
+                                    (GMT+0300) Estonia Time</option>
+                                    <option value="Africa/Addis_Ababa"  >
+                                    (GMT+0300) Ethiopia Time</option>
+                                    <option value="Europe/Helsinki"  >
+                                    (GMT+0300) Finland Time</option>
+                                    <option value="Europe/Athens"  >
+                                    (GMT+0300) Greece Time</option>
+                                    <option value="Asia/Baghdad"  >
+                                    (GMT+0300) Iraq Time</option>
+                                    <option value="Asia/Jerusalem"  >
+                                    (GMT+0300) Israel Time</option>
+                                    <option value="Asia/Amman"  >
+                                    (GMT+0300) Jordan Time</option>
+                                    <option value="Africa/Nairobi"  >
+                                    (GMT+0300) Kenya Time</option>
+                                    <option value="Asia/Kuwait"  >
+                                    (GMT+0300) Kuwait Time</option>
+                                    <option value="Europe/Riga"  >
+                                    (GMT+0300) Latvia Time</option>
+                                    <option value="Asia/Beirut"  >
+                                    (GMT+0300) Lebanon Time</option>
+                                    <option value="Europe/Vilnius"  >
+                                    (GMT+0300) Lithuania Time</option>
+                                    <option value="Indian/Antananarivo"  >
+                                    (GMT+0300) Madagascar Time</option>
+                                    <option value="Indian/Mayotte"  >
+                                    (GMT+0300) Mayotte Time</option>
+                                    <option value="Europe/Chisinau"  >
+                                    (GMT+0300) Moldova Time</option>
+                                    <option value="Asia/Qatar"  >
+                                    (GMT+0300) Qatar Time</option>
+                                    <option value="Europe/Bucharest"  >
+                                    (GMT+0300) Romania Time</option>
+                                    <option value="Europe/Moscow"  >
+                                    (GMT+0300) Russia (Moscow) Time</option>
+                                    <option value="Europe/Simferopol"  >
+                                    (GMT+0300) Russia (Simferopol) Time</option>
+                                    <option value="Asia/Riyadh"  >
+                                    (GMT+0300) Saudi Arabia Time</option>
+                                    <option value="Africa/Mogadishu"  >
+                                    (GMT+0300) Somalia Time</option>
+                                    <option value="Africa/Juba"  >
+                                    (GMT+0300) South Sudan Time</option>
+                                    <option value="Asia/Damascus"  >
+                                    (GMT+0300) Syria Time</option>
+                                    <option value="Africa/Dar_es_Salaam"  >
+                                    (GMT+0300) Tanzania Time</option>
+                                    <option value="Europe/Istanbul"  >
+                                    (GMT+0300) Turkey Time</option>
+                                    <option value="Africa/Kampala"  >
+                                    (GMT+0300) Uganda Time</option>
+                                    <option value="Europe/Kiev"  >
+                                    (GMT+0300) Ukraine (Kiev) Time</option>
+                                    <option value="Europe/Uzhgorod"  >
+                                    (GMT+0300) Ukraine (Uzhhorod) Time</option>
+                                    <option value="Europe/Zaporozhye"  >
+                                    (GMT+0300) Ukraine (Zaporozhye) Time</option>
+                                    <option value="Asia/Famagusta"  >
+                                    (GMT+0300) Unknown Region (Famagusta) Time</option>
+                                    <option value="Europe/Kirov"  >
+                                    (GMT+0300) Unknown Region (Kirov) Time</option>
+                                    <option value="Asia/Gaza"  >
+                                    (GMT+0300) World (Gaza) Time</option>
+                                    <option value="Asia/Hebron"  >
+                                    (GMT+0300) World (Hebron) Time</option>
+                                    <option value="Asia/Aden"  >
+                                    (GMT+0300) Yemen Time</option>
+                                    <option value="Asia/Yerevan"  >
+                                    (GMT+0400) Armenia Time</option>
+                                    <option
+                                     value="Asia/Baku"  >
+                                    (GMT+0400) Azerbaijan Time</option>
+                                    <option value="Asia/Tbilisi"  >
+                                    (GMT+0400) Georgia Time</option>
+                                    <option value="Indian/Mauritius"  >
+                                    (GMT+0400) Mauritius Time</option>
+                                    <option value="Asia/Muscat"  >
+                                    (GMT+0400) Oman Time</option>
+                                    <option value="Indian/Reunion"  >
+                                    (GMT+0400) Réunion Time</option>
+                                    <option value="Europe/Samara"  >
+                                    (GMT+0400) Russia (Samara) Time</option>
+                                    <option value="Europe/Volgograd"  >
+                                    (GMT+0400) Russia (Volgograd) Time</option>
+                                    <option value="Indian/Mahe"  >
+                                    (GMT+0400) Seychelles Time</option>
+                                    <option value="Asia/Dubai"  >
+                                    (GMT+0400) United Arab Emirates Time</option>
+                                    <option value="Europe/Astrakhan"  >
+                                    (GMT+0400) Unknown Region (Astrakhan) Time</option>
+                                    <option value="Europe/Saratov"  >
+                                    (GMT+0400) Unknown Region (Saratov) Time</option>
+                                    <option value="Europe/Ulyanovsk"  >
+                                    (GMT+0400) Unknown Region (Ulyanovsk) Time</option>
+                                    <option value="Asia/Kabul"  >
+                                    (GMT+0430) Afghanistan Time</option>
+                                    <option value="Asia/Tehran"  >
+                                    (GMT+0430) Iran Time</option>
+                                    <option value="Antarctica/Mawson"  >
+                                    (GMT+0500) Antarctica (Mawson) Time</option>
+                                    <option value="Indian/Kerguelen"  >
+                                    (GMT+0500) French Southern Territories Time</option>
+                                    <option value="Asia/Aqtau"  >
+                                    (GMT+0500) Kazakhstan (Aqtau) Time</option>
+                                    <option value="Asia/Aqtobe"  >
+                                    (GMT+0500) Kazakhstan (Aqtobe) Time</option>
+                                    <option value="Asia/Oral"  >
+                                    (GMT+0500) Kazakhstan (Oral) Time</option>
+                                    <option value="Asia/Qyzylorda"  >
+                                    (GMT+0500) Kazakhstan (Qyzylorda) Time</option>
+                                    <option value="Indian/Maldives"  >
+                                    (GMT+0500) Maldives Time</option>
+                                    <option value="Asia/Karachi"  >
+                                    (GMT+0500) Pakistan Time</option>
+                                    <option value="Asia/Yekaterinburg"  >
+                                    (GMT+0500) Russia (Yekaterinburg) Time</option>
+                                    <option value="Asia/Dushanbe"  >
+                                    (GMT+0500) Tajikistan Time</option>
+                                    <option value="Asia/Ashgabat"  >
+                                    (GMT+0500) Turkmenistan Time</option>
+                                    <option value="Asia/Atyrau"  >
+                                    (GMT+0500) Unknown Region (Atyrau) Time</option>
+                                    <option value="Asia/Samarkand"  >
+                                    (GMT+0500) Uzbekistan (Samarkand) Time</option>
+                                    <option value="Asia/Tashkent"  >
+                                    (GMT+0500) Uzbekistan (Tashkent) Time</option>
+                                    <option value="Asia/Kolkata"  >
+                                    (GMT+0530) India Time</option>
+                                    <option value="Asia/Colombo"  >
+                                    (GMT+0530) Sri Lanka Time</option>
+                                    <option value="Asia/Kathmandu"  >
+                                    (GMT+0545) Nepal Time</option>
+                                    <option value="Antarctica/Vostok"  >
+                                    (GMT+0600) Antarctica (Vostok) Time</option>
+                                    <option value="Asia/Dhaka"  >
+                                    (GMT+0600) Bangladesh Time</option>
+                                    <option value="Asia/Thimphu"  >
+                                    (GMT+0600) Bhutan Time</option>
+                                    <option value="Indian/Chagos"  >
+                                    (GMT+0600) British Indian Ocean Territory Time</option>
+                                    <option value="Asia/Urumqi"  >
+                                    (GMT+0600) China (Urumqi) Time</option>
+                                    <option value="Asia/Almaty"  >
+                                    (GMT+0600) Kazakhstan (Almaty) Time</option>
+                                    <option value="Asia/Bishkek"  >
+                                    (GMT+0600) Kyrgyzstan Time</option>
+                                    <option value="Asia/Omsk"  >
+                                    (GMT+0600) Russia (Omsk) Time</option>
+                                    <option value="Asia/Qostanay"  >
+                                    (GMT+0600) Unknown Region (Qostanay) Time</option>
+                                    <option value="Indian/Cocos"  >
+                                    (GMT+0630) Cocos (Keeling) Islands Time</option>
+                                    <option value="Asia/Rangoon"  >
+                                    (GMT+0630) Myanmar (Burma) Time</option>
+                                    <option value="Asia/Yangon"  >
+                                    (GMT+0630) Unknown Region (Yangon) Time</option>
+                                    <option value="Antarctica/Davis"  >
+                                    (GMT+0700) Antarctica (Davis) Time</option>
+                                    <option value="Asia/Phnom_Penh"  >
+                                    (GMT+0700) Cambodia Time</option>
+                                    <option value="Indian/Christmas"  >
+                                    (GMT+0700) Christmas Island Time</option>
+                                    <option value="Asia/Jakarta"  >
+                                    (GMT+0700) Indonesia (Jakarta) Time</option>
+                                    <option value="Asia/Pontianak"  >
+                                    (GMT+0700) Indonesia (Pontianak) Time</option>
+                                    <option value="Asia/Vientiane"  >
+                                    (GMT+0700) Laos Time</option>
+                                    <option value="Asia/Krasnoyarsk"  >
+                                    (GMT+0700) Russia (Krasnoyarsk) Time</option>
+                                    <option value="Asia/Novokuznetsk"  >
+                                    (GMT+0700) Russia (Novokuznetsk) Time</option>
+                                    <option value="Asia/Novosibirsk"  >
+                                    (GMT+0700) Russia (Novosibirsk) Time</option>
+                                    <option value="Asia/Bangkok"  >
+                                    (GMT+0700) Thailand Time</option>
+                                    <option value="Asia/Barnaul"  >
+                                    (GMT+0700) Unknown Region (Barnaul) Time</option>
+                                    <option value="Asia/Tomsk"  >
+                                    (GMT+0700) Unknown Region (Tomsk) Time</option>
+                                    <option value="Asia/Ho_Chi_Minh"  >
+                                    (GMT+0700) Vietnam Time</option>
+                                    <option value="Asia/Hovd"  >
+                                    (GMT+0700) World (Hovd) Time</option>
+                                    <option value="Antarctica/Casey"  >
+                                    (GMT+0800) Antarctica (Casey) Time</option>
+                                    <option value="Australia/Perth"  >
+                                    (GMT+0800) Australia (Perth) Time</option>
+                                    <option value="Asia/Brunei"  >
+                                    (GMT+0800) Brunei Time</option>
+                                    <option value="Asia/Shanghai"  >
+                                    (GMT+0800) China (Shanghai) Time</option>
+                                    <option value="Asia/Hong_Kong"  >
+                                    (GMT+0800) Hong Kong SAR China Time</option>
+                                    <option value="Asia/Makassar"  >
+                                    (GMT+0800) Indonesia (Makassar) Time</option>
+                                    <option value="Asia/Macau"  >
+                                    (GMT+0800) Macau SAR China Time</option>
+                                    <option value="Asia/Kuala_Lumpur"  >
+                                    (GMT+0800) Malaysia (Kuala Lumpur) Time</option>
+                                    <option value="Asia/Kuching"  >
+                                    (GMT+0800) Malaysia (Kuching) Time</option>
+                                    <option value="Asia/Choibalsan"  >
+                                    (GMT+0800) Mongolia (Choibalsan) Time</option>
+                                    <option value="Asia/Ulaanbaatar"  >
+                                    (GMT+0800) Mongolia (Ulaanbaatar) Time</option>
+                                    <option value="Asia/Manila"  >
+                                    (GMT+0800) Philippines Time</option>
+                                    <option value="Asia/Irkutsk"  >
+                                    (GMT+0800) Russia (Irkutsk) Time</option>
+                                    <option value="Asia/Singapore"  >
+                                    (GMT+0800) Singapore Time</option>
+                                    <option value="Asia/Taipei"  >
+                                    (GMT+0800) Taiwan Time</option>
+                                    <option value="Australia/Eucla"  >
+                                    (GMT+0845) World (Eucla) Time</option>
+                                    <option value="Asia/Jayapura"  >
+                                    (GMT+0900) Indonesia (Jayapura) Time</option>
+                                    <option value="Asia/Tokyo"  >
+                                    (GMT+0900) Japan Time</option>
+                                    <option value="Asia/Pyongyang"  >
+                                    (GMT+0900) North Korea Time</option>
+                                    <option value="Pacific/Palau"  >
+                                    (GMT+0900) Palau Time</option>
+                                    <option value="Asia/Chita"  >
+                                    (GMT+0900) Russia (Chita) Time</option>
+                                    <option value="Asia/Khandyga"  >
+                                    (GMT+0900) Russia (Khandyga) Time</option>
+                                    <option value="Asia/Yakutsk"  >
+                                    (GMT+0900) Russia (Yakutsk) Time</option>
+                                    <option value="Asia/Seoul"  >
+                                    (GMT+0900) South Korea Time</option>
+                                    <option value="Asia/Dili"  >
+                                    (GMT+0900) Timor-Leste Time</option>
+                                    <option value="Australia/Adelaide"  >
+                                    (GMT+0930) Australia (Adelaide) Time</option>
+                                    <option value="Australia/Broken_Hill"  >
+                                    (GMT+0930) Australia (Broken Hill) Time</option>
+                                    <option value="Australia/Darwin"  >
+                                    (GMT+0930) Australia (Darwin) Time</option>
+                                    <option value="Antarctica/DumontDUrville"  >
+                                    (GMT+1000) Antarctica (Dumont d’Urville) Time</option>
+                                    <option value="Australia/Brisbane"  >
+                                    (GMT+1000) Australia (Brisbane) Time</option>
+                                    <option value="Australia/Currie"  >
+                                    (GMT+1000) Australia (Currie) Time</option>
+                                    <option value="Australia/Hobart"  >
+                                    (GMT+1000) Australia (Hobart) Time</option>
+                                    <option value="Australia/Lindeman"  >
+                                    (GMT+1000) Australia (Lindeman) Time</option>
+                                    <option value="Australia/Melbourne"  >
+                                    (GMT+1000) Australia (Melbourne) Time</option>
+                                    <option value="Australia/Sydney"  >
+                                    (GMT+1000) Australia (Sydney) Time</option>
+                                    <option value="Pacific/Guam"  >
+                                    (GMT+1000) Guam Time</option>
+                                    <option value="Pacific/Chuuk"  >
+                                    (GMT+1000) Micronesia (Chuuk) Time</option>
+                                    <option value="Pacific/Saipan"  >
+                                    (GMT+1000) Northern Mariana Islands Time</option>
+                                    <option value="Pacific/Port_Moresby"  >
+                                    (GMT+1000) Papua New Guinea (Port Moresby) Time</option>
+                                    <option value="Asia/Ust-Nera"  >
+                                    (GMT+1000) Russia (Ust-Nera) Time</option>
+                                    <option value="Asia/Vladivostok"  >
+                                    (GMT+1000) Russia (Vladivostok) Time</option>
+                                    <option value="Australia/Lord_Howe"  >
+                                    (GMT+1030) World (Lord Howe) Time</option>
+                                    <option value="Antarctica/Macquarie"  >
+                                    (GMT+1100) Australia (Macquarie) Time</option>
+                                    <option value="Pacific/Kosrae"  >
+                                    (GMT+1100) Micronesia (Kosrae) Time</option>
+                                    <option value="Pacific/Pohnpei"  >
+                                    (GMT+1100)
+                                     Micronesia (Pohnpei) Time</option>
+                                    <option value="Pacific/Noumea"  >
+                                    (GMT+1100) New Caledonia Time</option>
+                                    <option value="Pacific/Norfolk"  >
+                                    (GMT+1100) Norfolk Island Time</option>
+                                    <option value="Pacific/Bougainville"  >
+                                    (GMT+1100) Papua New Guinea (Bougainville) Time</option>
+                                    <option value="Asia/Magadan"  >
+                                    (GMT+1100) Russia (Magadan) Time</option>
+                                    <option value="Asia/Sakhalin"  >
+                                    (GMT+1100) Russia (Sakhalin) Time</option>
+                                    <option value="Asia/Srednekolymsk"  >
+                                    (GMT+1100) Russia (Srednekolymsk) Time</option>
+                                    <option value="Pacific/Guadalcanal"  >
+                                    (GMT+1100) Solomon Islands Time</option>
+                                    <option value="Pacific/Efate"  >
+                                    (GMT+1100) Vanuatu Time</option>
+                                    <option value="Antarctica/McMurdo"  >
+                                    (GMT+1200) Antarctica (McMurdo) Time</option>
+                                    <option value="Pacific/Fiji"  >
+                                    (GMT+1200) Fiji Time</option>
+                                    <option value="Pacific/Tarawa"  >
+                                    (GMT+1200) Kiribati (Tarawa) Time</option>
+                                    <option value="Pacific/Kwajalein"  >
+                                    (GMT+1200) Marshall Islands (Kwajalein) Time</option>
+                                    <option value="Pacific/Majuro"  >
+                                    (GMT+1200) Marshall Islands (Majuro) Time</option>
+                                    <option value="Pacific/Nauru"  >
+                                    (GMT+1200) Nauru Time</option>
+                                    <option value="Pacific/Auckland"  >
+                                    (GMT+1200) New Zealand Time</option>
+                                    <option value="Asia/Anadyr"  >
+                                    (GMT+1200) Russia (Anadyr) Time</option>
+                                    <option value="Asia/Kamchatka"  >
+                                    (GMT+1200) Russia (Kamchatka) Time</option>
+                                    <option value="Pacific/Funafuti"  >
+                                    (GMT+1200) Tuvalu Time</option>
+                                    <option value="Pacific/Wake"  >
+                                    (GMT+1200) U.S. Outlying Islands (Wake) Time</option>
+                                    <option value="Pacific/Wallis"  >
+                                    (GMT+1200) Wallis &amp; Futuna Time</option>
+                                    <option value="Pacific/Chatham"  >
+                                    (GMT+1245) World (Chatham) Time</option>
+                                    <option value="Pacific/Enderbury"  >
+                                    (GMT+1300) Kiribati (Enderbury) Time</option>
+                                    <option value="Pacific/Apia"  >
+                                    (GMT+1300) Samoa Time</option>
+                                    <option value="Pacific/Fakaofo"  >
+                                    (GMT+1300) Tokelau Time</option>
+                                    <option value="Pacific/Tongatapu"  >
+                                    (GMT+1300) Tonga Time</option>
+                                    <option value="Pacific/Kiritimati"  >
+                                    (GMT+1400) Kiribati (Kiritimati) Time</option>
+                            </select>
+                            <label for="newEventTimezone">Timezone</label>
+                        </div>
+                        <hr>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="option5" id="donationBox" data-r-show-target=".option-5">
+                            <label class="form-check-label " for="flexCheckDefault">
+                              Opt for donations. Please note this will incur double signing.
+                            </label>
+                            <textarea class="form-control rounded-0 option-5 is-hidden" id="donationMessage" placeholder="Enter Donation message" rows="3"></textarea>
+                        </div>                                                   
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button
+                      type="button"
+                      class="btn btn-light border"
+                      data-bs-dismiss="modal"
+                      >
+                      Close
+                      </button>
+                      <button
+                      type="button"
+                      class="btn btn-dark"
+                      data-bs-dismiss="modal"
+                      id="newEventBtn"
+                      >
+                      Add Event
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--/Modal-1-->
+
+
+ 
+
+        <!--Modal-2-->
+        <div
+        class="modal fade"
+            id="addModal2"
+            tabindex="-1"
+            aria-labelledby="findEventModal"
+            aria-hidden="true"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="findEventModal">Find Event</h5>
+                        <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" id="eventID" placeholder="Event ID">
+                                    <label for="eventID">Enter Event ID</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                        type="button"
+                        class="btn btn-light border"
+                        data-bs-dismiss="modal"
+                        >
+                        Close
+                        </button>
+                        <button
+                        type="button"
+                        class="btn btn-dark"
+                        data-bs-dismiss="modal"
+                        id="findEventBtn"
+                        >
+                        Find Event
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--/Modal-2-->
+
+        <!--Event Modal-3-->
+        <div
+        class="modal fade"
+            id="eventDetailModal"
+            tabindex="-1"
+            aria-labelledby="eventModals"
+            aria-hidden="true"
+            data-backdrop="static"
+            data-keyboard="false"
+        >
+            <div class="modal-dialog" id="eventDisplay" data-bs-backdrop="static" data-bs-keyboard="false" >
+                
+            </div>
+        </div>
+        
+        <!--/Modal-3-->
+
+
+
+        <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"
+        ></script>
+        <script src="https://unpkg.com/ethereum-blockies@0.1.1/blockies.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.9.0/mdb.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+    <script type="text/javascript" src="main.js"></script></body>
+
+
+</html>
