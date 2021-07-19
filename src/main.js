@@ -49,6 +49,7 @@ const getBalance = async function (){
   const totalBalance = await kit.getTotalBalance(kit.defaultAccount)
   const cUSDBalance = totalBalance.cUSD.shiftedBy(-ERC20_DECIMALS).toFixed(2)
   document.querySelector("#balance").textContent = cUSDBalance
+  notificationOff()
   }
   
 const getEvent = async function(_ID) {
@@ -181,7 +182,7 @@ function eventTemplate(_event){
             </div>
             <div class="modal-body">
               <div class="card mb-4">
-                <img class="card-img-top" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="...">
+                <img class="card-img-top" src="${_event.image}" alt="...">
                 <div class="position-absolute top-0 end-0 bg-warning mt-4 px-2 py-1 rounded-start" id="attendees">
                   <i class="bi bi-people-fill"></i>&nbsp;${_event.attendees}
                 </div>
@@ -196,7 +197,7 @@ function eventTemplate(_event){
                   </p>
                   <p class="card-text" style="text-align: left !important;" id="Venues1">
                     <i class="bi bi-geo-alt-fill"></i>&nbsp;
-                    ${locationDetail1}, ${locationDetail5}
+                    ${locationDetail2},&nbsp;${locationDetail5}
                   </p>
                   <p class="card-text" style="text-align: left !important;" id="OnlineVenues1">
                     <i class="bi bi-geo-alt-fill"></i>&nbsp;
@@ -208,7 +209,7 @@ function eventTemplate(_event){
                   </p>
                   <p class="card-text" id="Time" style="text-align: left;">
                     <i class="bi bi-clock-fill"></i>&nbsp;
-                    ${_event.startTime}&nbsp;-&nbsp;${_event.endTime}&nbsp;${_event.timeZone}&nbsp;Time Zone
+                    ${_event.startTime}&nbsp;-&nbsp;${_event.endTime}&nbsp;${_event.timeZone}&nbsp;Time zone
                   </p>
                 </div>
               </div>
@@ -240,7 +241,7 @@ function eventTemplate(_event){
                   </p>
                   <p class="card-text" style="text-align: left !important;" id="Venues2">
                     <i class="bi bi-geo-alt-fill"></i>&nbsp;
-                    ${locationDetail1}, ${locationDetail5}  
+                    ${locationDetail2},&nbsp;${locationDetail5}  
                   </p>
                   <p class="card-text" style="text-align: left !important;" id="OnlineVenues2">
                     <i class="bi bi-geo-alt-fill"></i>&nbsp;
@@ -252,7 +253,7 @@ function eventTemplate(_event){
                   </p>
                   <p class="card-text" id="Time" style="text-align: left;">
                     <i class="bi bi-clock-fill"></i>&nbsp;
-                    ${_event.startTime}&nbsp;-&nbsp;${_event.endTime}&nbsp;${_event.timeZone}&nbsp;Time Zone
+                    ${_event.startTime}&nbsp;-&nbsp;${_event.endTime}&nbsp;${_event.timeZone}&nbsp;Time zone
                   </p>
                 </div>
               </div>
@@ -269,7 +270,7 @@ function eventTemplate(_event){
             </div>
             <div class="modal-body">
               <div class="card mb-4">
-                <img class="card-img-top" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="...">
+                <img class="card-img-top" src="${_event.image}" alt="...">
                 <div class="position-absolute top-0 end-0 bg-warning mt-4 px-2 py-1 rounded-start" id="attendees">
                   <i class="bi bi-people-fill"></i>&nbsp;${_event.attendees}
                 </div>
@@ -283,11 +284,11 @@ function eventTemplate(_event){
                     ${_event.eventDescription}
                   </p>
                   <p class="card-text" style="text-align: left !important;" id="Venues3">
-                    <i class="bi bi-geo-alt-fill"></i>&nbsp;
-                    ${locationDetail1}, ${locationDetail2},<br>${locationDetail3}, ${locationDetail4}, ${locationDetail5}
+                    <i class="bi bi-geo-alt-fill"></i>&nbsp;Venue:<br>
+                    &emsp;${locationDetail1},&nbsp;${locationDetail2},&nbsp;${locationDetail3},&nbsp;${locationDetail5}
                   </p>
                   <p class="card-text" style="text-align: left !important;" id="OnlineVenues3">
-                    <i class="bi bi-geo-alt-fill"></i><br>
+                    <i class="bi bi-geo-alt-fill"></i> Online Event<br>
                     <i class="bi bi-link-45deg"></i>&nbsp;Youtube = ${locationDetail1}<br>
                     <i class="bi bi-link-45deg"></i>&nbsp;Zoom= ${locationDetail2}<br>
                     <i class="bi bi-link-45deg"></i>&nbsp;Google Meet = ${locationDetail3}<br>
@@ -300,7 +301,7 @@ function eventTemplate(_event){
                   </p>
                   <p class="card-text" id="Time" style="text-align: left;">
                     <i class="bi bi-clock-fill"></i>&nbsp;
-                    ${_event.startTime}&nbsp;-&nbsp;${_event.endTime}&nbsp;${_event.timeZone}&nbsp;Time Zone
+                    ${_event.startTime}&nbsp;-&nbsp;${_event.endTime}&nbsp;${_event.timeZone}&nbsp;Time zone
                   </p>
                   <div id="checkDonation">
                   Support Event: <input type="checkbox" class="check" id="myCheck" onclick="myFunction()">
@@ -330,7 +331,7 @@ function eventTemplate(_event){
             </div>
             <div class="modal-body">
               <div class="card mb-4">
-                <img class="card-img-top" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="...">
+                <img class="card-img-top" src="${_event.image}" alt="...">
                 <div class="position-absolute top-0 end-0 bg-warning mt-4 px-2 py-1 rounded-start" id="attendees">
                   <i class="bi bi-people-fill"></i>&nbsp;${_event.attendees}
                 </div>
@@ -344,11 +345,11 @@ function eventTemplate(_event){
                     ${_event.eventDescription}
                   </p>
                   <p class="card-text" style="text-align: left !important;" id="Venues4">
-                    <i class="bi bi-geo-alt-fill"></i>&nbsp;
-                    ${locationDetail1}, ${locationDetail2}, ${locationDetail3}, ${locationDetail5}
+                    <i class="bi bi-geo-alt-fill"></i>&nbsp;Venue:<br>
+                    &emsp;${locationDetail1},&nbsp;${locationDetail2},&nbsp;${locationDetail3},&nbsp;${locationDetail5}
                   </p>
                   <p class="card-text" style="text-align: left !important;" id="OnlineVenues4">
-                    <i class="bi bi-geo-alt-fill"></i><br>
+                    <i class="bi bi-geo-alt-fill"></i> Online Event<br>
                     <i class="bi bi-link-45deg"></i>&nbsp;Youtube = ${locationDetail1}<br>
                     <i class="bi bi-link-45deg"></i>&nbsp;Skype= ${locationDetail2}<br>
                     <i class="bi bi-link-45deg"></i>&nbsp;Google Meet = ${locationDetail3}<br>
@@ -361,7 +362,7 @@ function eventTemplate(_event){
                   </p>
                   <p class="card-text" id="Time" style="text-align: left;">
                     <i class="bi bi-clock-fill"></i>&nbsp;
-                    ${_event.startTime}&nbsp;-&nbsp;${_event.endTime}&nbsp;${_event.timeZone}&nbsp;Time Zone
+                    ${_event.startTime}&nbsp;-&nbsp;${_event.endTime}&nbsp;${_event.timeZone}&nbsp;Time zone
                   </p>
                   <p class="card-text" id="total_donations" style="text-align: left;">
                     <i class="bi bi-cash-coin"></i>&nbsp;You haved received ${_event.totalDonations.shiftedBy(-ERC20_DECIMALS).toFixed(2)} cUSD as donations.
@@ -435,8 +436,9 @@ function editEventModal() {
   }
 
   if(!isDonationMsgActive){
-    $("checkDonation").addClass('is-hidden')
-    $("total_donations").addClass('is-hidden')
+    $("#checkDonation").addClass('is-hidden')
+    $("#total_donations").addClass('is-hidden')
+    isDonationMsgActive = false;
   }
 }
 
