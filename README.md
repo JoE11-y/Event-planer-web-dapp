@@ -42,9 +42,9 @@ Use already created Event IDs
 Live Demo url: https://joe11-y.github.io/Event-planer-web-dapp/
 
 
-## Development
+# Development
 
-# Install
+## Install
 
 ```
 
