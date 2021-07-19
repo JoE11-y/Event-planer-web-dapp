@@ -18,7 +18,7 @@ This dapps employs three types of user characters.
 	- For these users a different modal is shown, now depending if the event is a donation based event or a non-donation based event.
 	- If it is a donation based event, they can choose to support the event.
 3. Event Creators
-	- For these users a different modal is shown, where they can decide to close the event, where any query will return that the event is closed for any other user.
+	- For these users a different modal is shown, where they can decide to close the event, after which any query will return that the event is closed for any other user.
 	- It also shows the amount of donations the user has received from the event attendees.
 
 
